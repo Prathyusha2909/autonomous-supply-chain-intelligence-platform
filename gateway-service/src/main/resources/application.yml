@@ -27,6 +27,12 @@ spring:
           predicates:
             - Path=/api/intelligence/**,/api/copilot/**
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
 management:
   endpoints:
     web:

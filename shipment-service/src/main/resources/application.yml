@@ -26,6 +26,12 @@ spring:
       properties:
         spring.json.add.type.headers: false
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
 management:
   endpoints:
     web:
