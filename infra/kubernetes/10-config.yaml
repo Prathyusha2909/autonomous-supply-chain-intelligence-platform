@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: platform-config
+  namespace: supply-chain-intelligence
+data:
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  SHIPMENT_SERVICE_URL: http://shipment-service:8081
+  INTELLIGENCE_SERVICE_URL: http://intelligence-service:8082
+  FRONTEND_ORIGINS: http://localhost:5173
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: platform-secrets
+  namespace: supply-chain-intelligence
+type: Opaque
+stringData:
+  SHIPMENT_DB_USER: shipments
+  SHIPMENT_DB_PASSWORD: shipments
+  INTELLIGENCE_DB_USER: intelligence
+  INTELLIGENCE_DB_PASSWORD: intelligence

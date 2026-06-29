@@ -1,0 +1,16 @@
+target/
+build/
+out/
+.gradle/
+.idea/
+.vscode/
+*.iml
+*.log
+.env
+.DS_Store
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+*.local
+docker-compose.override.yml

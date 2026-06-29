@@ -1,0 +1,14 @@
+.git
+.github
+**/target
+**/build
+**/out
+frontend/node_modules
+frontend/dist
+frontend/*.tsbuildinfo
+node_modules
+dist
+*.log
+.env
+.idea
+.vscode

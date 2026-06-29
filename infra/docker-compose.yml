@@ -1,0 +1,144 @@
+name: autonomous-supply-chain
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.1
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+
+  shipment-db:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: shipments
+      POSTGRES_USER: shipments
+      POSTGRES_PASSWORD: shipments
+    volumes:
+      - shipment-data:/var/lib/postgresql/data
+
+  intelligence-db:
+    image: postgres:16-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: intelligence
+      POSTGRES_USER: intelligence
+      POSTGRES_PASSWORD: intelligence
+    volumes:
+      - intelligence-data:/var/lib/postgresql/data
+
+  shipment-service:
+    build:
+      context: ..
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE: shipment-service
+    depends_on:
+      - kafka
+      - shipment-db
+    environment:
+      SERVER_PORT: 8081
+      SPRING_DATASOURCE_URL: jdbc:postgresql://shipment-db:5432/shipments
+      SPRING_DATASOURCE_USERNAME: shipments
+      SPRING_DATASOURCE_PASSWORD: shipments
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+    ports:
+      - "8081:8081"
+
+  intelligence-service:
+    build:
+      context: ..
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE: intelligence-service
+    depends_on:
+      - kafka
+      - intelligence-db
+    environment:
+      SERVER_PORT: 8082
+      SPRING_DATASOURCE_URL: jdbc:postgresql://intelligence-db:5432/intelligence
+      SPRING_DATASOURCE_USERNAME: intelligence
+      SPRING_DATASOURCE_PASSWORD: intelligence
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+    ports:
+      - "8082:8082"
+
+  gateway-service:
+    build:
+      context: ..
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE: gateway-service
+    depends_on:
+      - shipment-service
+      - intelligence-service
+    environment:
+      SERVER_PORT: 8080
+      SHIPMENT_SERVICE_URL: http://shipment-service:8081
+      INTELLIGENCE_SERVICE_URL: http://intelligence-service:8082
+    ports:
+      - "8080:8080"
+
+  event-simulator:
+    build:
+      context: ..
+      dockerfile: Dockerfile.service
+      args:
+        SERVICE: event-simulator
+    depends_on:
+      - kafka
+    environment:
+      SERVER_PORT: 8083
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      SIMULATOR_FIXED_DELAY_MS: 5000
+    ports:
+      - "8083:8083"
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: frontend/Dockerfile
+    depends_on:
+      - gateway-service
+    ports:
+      - "5173:80"
+
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "3000:3000"
+
+volumes:
+  shipment-data:
+  intelligence-data:
