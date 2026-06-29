@@ -9,32 +9,56 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CopilotService {
     private final ShipmentRiskProfileRepository riskProfileRepository;
     private final BottleneckObservationRepository bottleneckRepository;
+    private final LogisticsQueryService logisticsQueryService;
+    private final List<AiCopilotClient> aiCopilotClients;
 
     public CopilotService(
             ShipmentRiskProfileRepository riskProfileRepository,
-            BottleneckObservationRepository bottleneckRepository
+            BottleneckObservationRepository bottleneckRepository,
+            LogisticsQueryService logisticsQueryService,
+            List<AiCopilotClient> aiCopilotClients
     ) {
         this.riskProfileRepository = riskProfileRepository;
         this.bottleneckRepository = bottleneckRepository;
+        this.logisticsQueryService = logisticsQueryService;
+        this.aiCopilotClients = aiCopilotClients;
     }
 
     public CopilotAnswer answer(String question) {
+        QueryPlan queryPlan = logisticsQueryService.planAndExecute(question);
         String normalized = question.toLowerCase();
+        CopilotAnswer fallback;
         if (normalized.contains("bottleneck") || normalized.contains("congestion")) {
-            return bottleneckAnswer();
+            fallback = bottleneckAnswer();
+        } else if (normalized.contains("why") || normalized.contains("root cause")) {
+            fallback = rootCauseAnswer();
+        } else if (normalized.contains("delay") || normalized.contains("risk") || normalized.contains("late")) {
+            fallback = delayRiskAnswer();
+        } else {
+            fallback = operationsSummaryAnswer();
         }
-        if (normalized.contains("why") || normalized.contains("root cause")) {
-            return rootCauseAnswer();
-        }
-        if (normalized.contains("delay") || normalized.contains("risk") || normalized.contains("late")) {
-            return delayRiskAnswer();
-        }
-        return operationsSummaryAnswer();
+        return configuredAiClient()
+                .flatMap(client -> client.answer(question, queryPlan, fallback))
+                .orElseGet(() -> withQueryEvidence(fallback, queryPlan));
+    }
+
+    private Optional<AiCopilotClient> configuredAiClient() {
+        return aiCopilotClients.stream()
+                .filter(AiCopilotClient::isConfigured)
+                .findFirst();
+    }
+
+    private CopilotAnswer withQueryEvidence(CopilotAnswer answer, QueryPlan queryPlan) {
+        List<CopilotEvidence> evidence = new ArrayList<>();
+        evidence.add(new CopilotEvidence("query-plan", queryPlan.intent().name(), queryPlan.sql()));
+        evidence.addAll(answer.evidence());
+        return new CopilotAnswer(answer.answer(), answer.recommendations(), evidence, answer.generatedAt());
     }
 
     private CopilotAnswer delayRiskAnswer() {
