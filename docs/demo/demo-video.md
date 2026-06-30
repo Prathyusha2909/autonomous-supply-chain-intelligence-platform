@@ -2,6 +2,8 @@
 
 Target length: 2 to 3 minutes.
 
+Generated local walkthrough: [supply-chain-demo-walkthrough.mp4](supply-chain-demo-walkthrough.mp4)
+
 ## 0:00-0:20 Architecture
 
 Show `docs/architecture.svg`.

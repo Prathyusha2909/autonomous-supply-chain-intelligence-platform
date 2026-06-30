@@ -4,6 +4,7 @@ out/
 .gradle/
 .idea/
 .vscode/
+.tools/
 *.iml
 *.log
 .env

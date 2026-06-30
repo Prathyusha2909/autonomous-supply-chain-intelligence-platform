@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Supply Chain Demo Storyboard</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f6f3ee;
+        color: #172026;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background:
+          linear-gradient(90deg, rgba(21, 101, 118, 0.14), transparent 34%),
+          linear-gradient(180deg, #fbfaf6, #ece7de);
+      }
+
+      main {
+        width: 1280px;
+        height: 720px;
+        padding: 44px 54px 48px;
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: 34px;
+      }
+
+      .copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 0;
+      }
+
+      .eyebrow {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0;
+        color: #0d6f7f;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 18px 0 16px;
+        font-size: 56px;
+        line-height: 1.02;
+        letter-spacing: 0;
+        max-width: 520px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.42;
+        color: #34434b;
+        max-width: 520px;
+      }
+
+      .steps {
+        display: grid;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 34px 1fr;
+        align-items: center;
+        gap: 12px;
+        font-size: 20px;
+        color: #223038;
+      }
+
+      .dot {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: #0d6f7f;
+        color: #fff;
+        font-weight: 800;
+      }
+
+      .visual {
+        align-self: stretch;
+        display: grid;
+        place-items: center;
+        min-width: 0;
+      }
+
+      .frame {
+        width: 100%;
+        height: 100%;
+        border: 1px solid rgba(23, 32, 38, 0.14);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 18px 55px rgba(23, 32, 38, 0.14);
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+      }
+
+      .frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .code {
+        width: 100%;
+        height: 100%;
+        padding: 34px;
+        background: #13262b;
+        color: #effaf8;
+        font-family: "Cascadia Code", Consolas, monospace;
+        font-size: 22px;
+        line-height: 1.45;
+        white-space: pre-wrap;
+        display: flex;
+        align-items: center;
+      }
+
+      .metricGrid {
+        width: 100%;
+        height: 100%;
+        padding: 34px;
+        display: grid;
+        gap: 18px;
+        align-content: center;
+      }
+
+      .metric {
+        padding: 18px 20px;
+        border-radius: 8px;
+        border: 1px solid rgba(23, 32, 38, 0.12);
+        background: #fbfaf7;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 28px;
+        color: #172026;
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 6px;
+        font-size: 19px;
+        color: #526069;
+      }
+
+      .footer {
+        font-size: 18px;
+        color: #637078;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="copy">
+        <div>
+          <div class="eyebrow" id="eyebrow"></div>
+          <h1 id="title"></h1>
+          <p id="body"></p>
+          <div class="steps" id="steps"></div>
+        </div>
+        <div class="footer" id="footer"></div>
+      </section>
+      <section class="visual">
+        <div class="frame" id="visual"></div>
+      </section>
+    </main>
+    <script>
+      const slides = [
+        {
+          eyebrow: "0:00 Architecture",
+          title: "Autonomous supply chain control tower",
+          body: "React, Spring Cloud Gateway, Spring Boot microservices, Kafka streams, PostgreSQL, AI copilot, Prometheus, and Grafana.",
+          image: "../architecture.svg",
+          steps: ["Gateway routes API traffic", "Shipment events flow through Kafka", "Intelligence service scores risk"]
+        },
+        {
+          eyebrow: "0:20 Dashboard",
+          title: "Operations dashboard for shipment visibility",
+          body: "The React console surfaces live shipment status, delay risk, exception hotspots, and AI-assisted recommendations.",
+          image: "../screenshots/dashboard.png",
+          steps: ["Track active shipments", "Review delay exposure", "Inspect bottlenecks"]
+        },
+        {
+          eyebrow: "0:45 Shipment creation",
+          title: "Create a shipment through the gateway",
+          body: "The command API stores operational state and publishes a shipment lifecycle event for downstream consumers.",
+          code: "POST /api/shipments\n\n{\n  \"orderNumber\": \"PO-44519\",\n  \"carrier\": \"Maersk\",\n  \"origin\": \"Shanghai, CN\",\n  \"destination\": \"Los Angeles, US\",\n  \"plannedEta\": \"2026-07-05T16:00:00Z\"\n}",
+          steps: ["Spring REST controller validates input", "PostgreSQL persists the shipment", "Kafka publishes SHIPMENT_CREATED"]
+        },
+        {
+          eyebrow: "1:05 Kafka event flow",
+          title: "Events stream into intelligence services",
+          body: "Shipment, ETA, warehouse, and exception events are processed as a real-time logistics stream.",
+          image: "../screenshots/kafka-stream.svg",
+          steps: ["Topic: shipment.events", "Consumer group: intelligence-service", "Risk model updates the read model"]
+        },
+        {
+          eyebrow: "1:25 Delay risk",
+          title: "Delay risk and bottleneck detection",
+          body: "The intelligence service combines ETA drift, dwell time, exception severity, and location patterns to prioritize operations work.",
+          metrics: [
+            ["Risk score 0.91", "Port congestion and long dwell time detected for PO-44519."],
+            ["Root cause", "Berth wait at Port of Singapore is the strongest delay driver."],
+            ["Recommendation", "Escalate carrier, rebook priority handling, notify customer success."]
+          ],
+          steps: ["Score risk", "Identify bottleneck", "Generate action"]
+        },
+        {
+          eyebrow: "1:45 AI copilot",
+          title: "OpenAI or Claude-backed logistics answers",
+          body: "Natural-language questions map to safe predefined SQL plans. The LLM summarizes returned evidence instead of generating arbitrary SQL.",
+          code: "POST /api/copilot/query\n\n{\n  \"question\": \"Which shipments are likely delayed and what should ops do next?\"\n}\n\nProviders:\nAI_PROVIDER=openai\nAI_PROVIDER=anthropic\nAI_PROVIDER=none",
+          steps: ["Plan query intent", "Fetch trusted evidence rows", "Return ops-ready answer"]
+        },
+        {
+          eyebrow: "2:05 Swagger",
+          title: "Inspectable APIs for recruiter review",
+          body: "Springdoc OpenAPI exposes the command, intelligence, and copilot endpoints at /swagger-ui.html.",
+          image: "../screenshots/swagger-api.svg",
+          steps: ["Shipment Swagger UI", "Intelligence Swagger UI", "Gateway curl examples"]
+        },
+        {
+          eyebrow: "2:25 Observability",
+          title: "Monitoring and deployment proof",
+          body: "Docker Compose, Kubernetes manifests, Prometheus scrape config, Grafana provisioning, CI workflow, and local validation notes are included.",
+          image: "../screenshots/grafana-dashboard.svg",
+          steps: ["Maven tests passing", "Frontend build passing", "Docker ready when disk space is available"]
+        }
+      ];
+
+      const params = new URLSearchParams(window.location.search);
+      const index = Math.max(0, Math.min(slides.length - 1, Number(params.get("slide") || 1) - 1));
+      const slide = slides[index];
+      document.getElementById("eyebrow").textContent = slide.eyebrow;
+      document.getElementById("title").textContent = slide.title;
+      document.getElementById("body").textContent = slide.body;
+      document.getElementById("footer").textContent = `Autonomous Supply Chain Intelligence Platform - slide ${index + 1} of ${slides.length}`;
+
+      const steps = document.getElementById("steps");
+      slide.steps.forEach((item, stepIndex) => {
+        const row = document.createElement("div");
+        row.className = "step";
+        row.innerHTML = `<span class="dot">${stepIndex + 1}</span><span>${item}</span>`;
+        steps.appendChild(row);
+      });
+
+      const visual = document.getElementById("visual");
+      if (slide.image) {
+        const image = document.createElement("img");
+        image.src = slide.image;
+        image.alt = slide.title;
+        visual.appendChild(image);
+      } else if (slide.code) {
+        const code = document.createElement("div");
+        code.className = "code";
+        code.textContent = slide.code;
+        visual.appendChild(code);
+      } else {
+        const grid = document.createElement("div");
+        grid.className = "metricGrid";
+        slide.metrics.forEach(([label, value]) => {
+          const metric = document.createElement("div");
+          metric.className = "metric";
+          metric.innerHTML = `<strong>${label}</strong><span>${value}</span>`;
+          grid.appendChild(metric);
+        });
+        visual.appendChild(grid);
+      }
+    </script>
+  </body>
+</html>

@@ -16,10 +16,12 @@ Production-style supply chain intelligence platform for real-time logistics visi
 
 Demo assets:
 
-- [2-3 minute demo video script](docs/demo/demo-video.md)
+- [2-minute demo walkthrough video](docs/demo/supply-chain-demo-walkthrough.mp4)
+- [Demo video script](docs/demo/demo-video.md)
 - [Screenshot capture checklist](docs/demo/capture-checklist.md)
 - [API response samples](docs/evidence/api-response-samples.md)
 - [Kafka consumer sample](docs/evidence/kafka-consumer-sample.txt)
+- [Java test summary](docs/evidence/java-test-summary.md)
 - [Local validation notes](docs/evidence/local-validation.md)
 
 ## Tech Stack
