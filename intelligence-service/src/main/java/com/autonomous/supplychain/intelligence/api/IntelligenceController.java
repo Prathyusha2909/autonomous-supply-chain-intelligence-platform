@@ -53,7 +53,7 @@ public class IntelligenceController {
     }
 
     @GetMapping("/intelligence/risks")
-    List<RiskProfileResponse> risks(@RequestParam(defaultValue = "0.0") double threshold) {
+    List<RiskProfileResponse> risks(@RequestParam(name = "threshold", defaultValue = "0.0") double threshold) {
         return riskProfileRepository.findByRiskScoreGreaterThanEqualOrderByRiskScoreDesc(threshold)
                 .stream()
                 .map(RiskProfileResponse::from)
@@ -61,7 +61,7 @@ public class IntelligenceController {
     }
 
     @GetMapping("/intelligence/shipments/{shipmentId}")
-    RiskProfileResponse shipmentRisk(@PathVariable String shipmentId) {
+    RiskProfileResponse shipmentRisk(@PathVariable("shipmentId") String shipmentId) {
         return riskProfileRepository.findById(shipmentId)
                 .map(RiskProfileResponse::from)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Risk profile not found"));

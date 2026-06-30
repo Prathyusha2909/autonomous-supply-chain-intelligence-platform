@@ -38,12 +38,32 @@ Maven test lifecycle completed successfully.
 Surefire: 5 tests run, 0 failures, 0 errors, 0 skipped.
 ```
 
-- Verified repository history has 7 commits on `origin/main` before this validation update.
+- Installed Docker Desktop 4.78.0 to `D:\DockerDesktop` and kept Docker WSL data on `D:\DockerData\wsl`.
+- Ran the full local stack with:
 
-## Blocked On Local Machine
+```bash
+docker compose -f infra/docker-compose.yml up --build -d
+```
 
-- `docker compose -f infra/docker-compose.yml up --build` cannot run yet because Docker is not installed.
-- Current C drive free space is about 0.28 GB, which is not enough for a safe Docker Desktop installation plus image pulls for Kafka, PostgreSQL, Grafana, and the Spring services.
-- Live Kafka, Swagger, and Grafana browser screenshots require Docker runtime support on the local machine.
+Result:
 
-The repository includes Docker Compose, Kubernetes manifests, Swagger/OpenAPI configuration, Prometheus/Grafana provisioning, AI provider adapters, and a demo capture checklist so the remaining live proof artifacts can be recorded once Docker has enough local disk space.
+```text
+11 containers up: frontend, gateway, shipment-service, intelligence-service,
+event-simulator, Kafka, Zookeeper, PostgreSQL x2, Prometheus, and Grafana.
+```
+
+- Verified health checks for gateway, shipment service, and intelligence service returned `{"status":"UP"}`.
+- Verified Kafka topics: `shipment.events` and `shipment.exception-alerts`.
+- Captured live browser screenshots for the React dashboard, Swagger UI, and Grafana dashboard.
+- Ran the shipment creation -> Kafka event -> delay risk -> copilot answer demo flow successfully.
+- Verified repository history has 8 commits on `origin/main` before this runtime proof update.
+
+## Runtime Notes
+
+Useful local URLs after startup:
+
+- Frontend: `http://localhost:5173`
+- Gateway: `http://localhost:8080`
+- Shipment Swagger UI: `http://localhost:8081/swagger-ui.html`
+- Intelligence Swagger UI: `http://localhost:8082/swagger-ui.html`
+- Grafana: `http://localhost:3000` (`admin` / `admin`)

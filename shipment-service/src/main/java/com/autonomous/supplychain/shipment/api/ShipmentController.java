@@ -34,17 +34,17 @@ public class ShipmentController {
     }
 
     @GetMapping("/{shipmentId}")
-    ShipmentResponse getShipment(@PathVariable String shipmentId) {
+    ShipmentResponse getShipment(@PathVariable("shipmentId") String shipmentId) {
         return shipmentService.getShipment(shipmentId);
     }
 
     @PostMapping("/{shipmentId}/events")
-    ShipmentResponse ingestEvent(@PathVariable String shipmentId, @Valid @RequestBody EventIngestRequest request) {
+    ShipmentResponse ingestEvent(@PathVariable("shipmentId") String shipmentId, @Valid @RequestBody EventIngestRequest request) {
         return shipmentService.ingestEvent(shipmentId, request);
     }
 
     @GetMapping("/{shipmentId}/events")
-    List<ShipmentTimelineItem> getTimeline(@PathVariable String shipmentId) {
+    List<ShipmentTimelineItem> getTimeline(@PathVariable("shipmentId") String shipmentId) {
         return shipmentService.getTimeline(shipmentId);
     }
 }

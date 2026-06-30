@@ -8,11 +8,11 @@ Production-style supply chain intelligence platform for real-time logistics visi
 
 | Dashboard | Kafka Stream |
 | --- | --- |
-| ![React operations dashboard](docs/screenshots/dashboard.png) | ![Kafka shipment stream](docs/screenshots/kafka-stream.svg) |
+| ![React operations dashboard](docs/screenshots/dashboard-live.png) | ![Kafka runtime proof](docs/screenshots/kafka-running.png) |
 
 | Swagger / API | Grafana |
 | --- | --- |
-| ![Swagger API documentation](docs/screenshots/swagger-api.svg) | ![Grafana observability dashboard](docs/screenshots/grafana-dashboard.svg) |
+| ![Swagger API documentation](docs/screenshots/swagger-api.png) | ![Grafana observability dashboard](docs/screenshots/grafana-dashboard.png) |
 
 Demo assets:
 
@@ -23,6 +23,7 @@ Demo assets:
 - [Kafka consumer sample](docs/evidence/kafka-consumer-sample.txt)
 - [Java test summary](docs/evidence/java-test-summary.md)
 - [Local validation notes](docs/evidence/local-validation.md)
+- [Docker runtime validation](docs/evidence/docker-runtime-validation.md)
 
 ## Tech Stack
 

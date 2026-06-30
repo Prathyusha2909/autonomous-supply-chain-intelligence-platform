@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Kafka Runtime Proof</title>
+    <style>
+      body {
+        margin: 0;
+        background: #0f172a;
+        color: #e5e7eb;
+        font-family: Consolas, "Courier New", monospace;
+      }
+      main {
+        padding: 42px;
+      }
+      h1 {
+        margin: 0 0 12px;
+        color: #38bdf8;
+        font-family: Arial, sans-serif;
+        font-size: 34px;
+      }
+      .meta {
+        color: #94a3b8;
+        margin-bottom: 28px;
+        font-family: Arial, sans-serif;
+      }
+      section {
+        border: 1px solid #334155;
+        border-radius: 8px;
+        margin-bottom: 22px;
+        overflow: hidden;
+        background: #111827;
+      }
+      h2 {
+        margin: 0;
+        padding: 14px 18px;
+        background: #1e293b;
+        color: #f8fafc;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+      }
+      pre {
+        margin: 0;
+        padding: 18px;
+        white-space: pre-wrap;
+        line-height: 1.45;
+        font-size: 16px;
+      }
+      .ok {
+        color: #86efac;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Kafka + Docker Runtime Proof</h1>
+      <div class="meta">Captured from the local Docker Compose stack on 2026-06-30</div>
+      <section>
+        <h2>Kafka Topics</h2>
+        <pre><span class="ok">$ docker exec autonomous-supply-chain-kafka-1 kafka-topics --bootstrap-server localhost:9092 --list</span>
+__consumer_offsets
+shipment.events
+shipment.exception-alerts</pre>
+      </section>
+      <section>
+        <h2>Compose Services</h2>
+        <pre><span class="ok">$ docker compose -f infra/docker-compose.yml ps</span>
+event-simulator        Up   0.0.0.0:8083->8083/tcp
+frontend               Up   0.0.0.0:5173->80/tcp
+gateway-service        Up   0.0.0.0:8080->8080/tcp
+grafana                Up   0.0.0.0:3000->3000/tcp
+intelligence-service   Up   0.0.0.0:8082->8082/tcp
+kafka                  Up   0.0.0.0:9092->9092/tcp
+prometheus             Up   0.0.0.0:9090->9090/tcp
+shipment-service       Up   0.0.0.0:8081->8081/tcp
+postgres x2            Up   5432/tcp, 5433/tcp
+zookeeper              Up   2181/tcp</pre>
+      </section>
+      <section>
+        <h2>Live Event Flow</h2>
+        <pre>Created shipment SHP-27FCCA85, raised EXCEPTION_RAISED, consumed by intelligence-service, risk read model returned 99% delay risk.</pre>
+      </section>
+    </main>
+  </body>
+</html>

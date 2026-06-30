@@ -1,6 +1,7 @@
 # API Response Evidence Samples
 
-These samples are the exact payload shape expected from the running stack.
+These samples were captured from the running Docker Compose stack on 2026-06-30.
+Use a unique `orderNumber` when replaying the create request because shipment order numbers are unique.
 
 ## Create Shipment
 
@@ -10,7 +11,7 @@ Request:
 curl -X POST http://localhost:8080/api/shipments \
   -H "Content-Type: application/json" \
   -d '{
-    "orderNumber": "PO-44519",
+    "orderNumber": "PO-LIVE-145809",
     "carrier": "Maersk",
     "origin": "Shanghai, CN",
     "destination": "Los Angeles, US",
@@ -22,12 +23,13 @@ Response:
 
 ```json
 {
-  "id": "SHP-8F2A91CD",
-  "orderNumber": "PO-44519",
+  "id": "SHP-27FCCA85",
+  "orderNumber": "PO-LIVE-145809",
   "carrier": "Maersk",
   "origin": "Shanghai, CN",
   "destination": "Los Angeles, US",
   "status": "CREATED",
+  "currentLocationName": null,
   "plannedEta": "2026-07-05T16:00:00Z",
   "predictedEta": "2026-07-05T16:00:00Z",
   "riskScore": 0.1
@@ -39,7 +41,7 @@ Response:
 Request:
 
 ```bash
-curl -X POST http://localhost:8080/api/shipments/SHP-8F2A91CD/events \
+curl -X POST http://localhost:8080/api/shipments/SHP-27FCCA85/events \
   -H "Content-Type: application/json" \
   -d '{
     "eventType": "EXCEPTION_RAISED",
@@ -58,11 +60,40 @@ Response:
 
 ```json
 {
-  "id": "SHP-8F2A91CD",
+  "id": "SHP-27FCCA85",
+  "orderNumber": "PO-LIVE-145809",
+  "carrier": "Maersk",
   "status": "EXCEPTION",
   "currentLocationName": "Port of Singapore",
   "predictedEta": "2026-07-06T03:30:00Z",
-  "riskScore": 0.65
+  "riskScore": 0.9416666666666667
+}
+```
+
+## Delay Risk
+
+Request:
+
+```bash
+curl "http://localhost:8080/api/intelligence/risks?threshold=0.45"
+```
+
+Response excerpt:
+
+```json
+{
+  "shipmentId": "SHP-27FCCA85",
+  "orderNumber": "PO-LIVE-145809",
+  "carrier": "Maersk",
+  "lastLocationName": "Port of Singapore",
+  "status": "EXCEPTION",
+  "lastEventType": "EXCEPTION_RAISED",
+  "severity": "HIGH",
+  "exceptionCode": "PORT_CONGESTION",
+  "riskScore": 0.99,
+  "delayMinutes": 690,
+  "rootCause": "Port congestion is increasing dwell time and berth uncertainty.",
+  "recommendation": "Escalate to control tower, notify customer success, and book an alternate recovery option."
 }
 ```
 
@@ -80,17 +111,20 @@ Response:
 
 ```json
 {
-  "answer": "The highest-risk shipment is SHP-8F2A91CD. Port congestion at Port of Singapore is driving dwell time and ETA variance.",
+  "answer": "2 shipment(s) are above the delay risk threshold. The highest-risk lanes need carrier recovery confirmation and proactive customer ETA updates.",
   "recommendations": [
-    "Escalate to the control tower and request a carrier recovery plan.",
-    "Notify customer success with the revised ETA.",
-    "Evaluate alternate routing if the next scan does not improve."
+    "Escalate to control tower, notify customer success, and book an alternate recovery option."
   ],
   "evidence": [
     {
       "type": "query-plan",
       "title": "DELAY_RISK",
       "detail": "SELECT shipment_id, order_number, carrier, origin, destination, last_location_name, status, exception_code, risk_score, delay_minutes, root_cause, recommendation FROM shipment_risk_profiles WHERE risk_score >= 0.45 ORDER BY risk_score DESC LIMIT 10"
+    },
+    {
+      "type": "shipment",
+      "title": "SHP-27FCCA85 risk 99%",
+      "detail": "Port congestion is increasing dwell time and berth uncertainty."
     }
   ]
 }
