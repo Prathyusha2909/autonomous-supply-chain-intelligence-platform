@@ -2,12 +2,33 @@
 
 Production-style supply chain intelligence platform for real-time logistics visibility, exception management, delay prediction, bottleneck detection, and AI operations copiloting.
 
+## Recruiter Quick View
+
+![Architecture](docs/architecture.svg)
+
+| Dashboard | Kafka Stream |
+| --- | --- |
+| ![React operations dashboard](docs/screenshots/dashboard.svg) | ![Kafka shipment stream](docs/screenshots/kafka-stream.svg) |
+
+| Swagger / API | Grafana |
+| --- | --- |
+| ![Swagger API documentation](docs/screenshots/swagger-api.svg) | ![Grafana observability dashboard](docs/screenshots/grafana-dashboard.svg) |
+
+Demo assets:
+
+- [2-3 minute demo video script](docs/demo/demo-video.md)
+- [Screenshot capture checklist](docs/demo/capture-checklist.md)
+- [API response samples](docs/evidence/api-response-samples.md)
+- [Kafka consumer sample](docs/evidence/kafka-consumer-sample.txt)
+
 ## Tech Stack
 
 - Java 17, Spring Boot, Spring Kafka, Spring Data JPA, Spring Cloud Gateway
 - Apache Kafka for event-driven shipment, ETA, warehouse, and exception streams
 - PostgreSQL persistence with Flyway migrations
 - React + TypeScript operations dashboard
+- Springdoc OpenAPI Swagger UI
+- OpenAI or Claude-backed logistics copilot with deterministic fallback
 - Docker Compose for local development
 - Kubernetes manifests for cloud-native deployment on AKS, EKS, or any conformant cluster
 - Prometheus and Grafana observability
@@ -58,8 +79,36 @@ Useful URLs:
 - Gateway: `http://localhost:8080`
 - Shipment service: `http://localhost:8081`
 - Intelligence service: `http://localhost:8082`
+- Shipment Swagger UI: `http://localhost:8081/swagger-ui.html`
+- Intelligence Swagger UI: `http://localhost:8082/swagger-ui.html`
 - Prometheus: `http://localhost:9090`
 - Grafana: `http://localhost:3000` (`admin` / `admin`)
+
+## AI Copilot
+
+The copilot supports three modes:
+
+- `AI_PROVIDER=openai` - sends the safe query plan and result rows to the OpenAI Responses API.
+- `AI_PROVIDER=anthropic` - sends the same evidence packet to Claude Messages API.
+- `AI_PROVIDER=none` - uses deterministic logistics reasoning, useful for local demos without API keys.
+
+Natural-language questions are mapped to predefined SQL templates in the intelligence service. The LLM never receives permission to generate arbitrary SQL; it only summarizes rows returned by safe query plans such as delay risk, bottleneck, root-cause, and operations summary.
+
+Example OpenAI configuration:
+
+```bash
+AI_PROVIDER=openai
+OPENAI_API_KEY=your_key_here
+OPENAI_MODEL=gpt-4.1-mini
+```
+
+Example Claude configuration:
+
+```bash
+AI_PROVIDER=anthropic
+ANTHROPIC_API_KEY=your_key_here
+ANTHROPIC_MODEL=claude-3-5-sonnet-latest
+```
 
 ## API Examples
 
@@ -102,6 +151,8 @@ curl -X POST http://localhost:8080/api/copilot/query \
   -d '{"question":"Which shipments are likely delayed and what should ops do next?"}'
 ```
 
+OpenAPI docs are available at `/swagger-ui.html` on each Spring service.
+
 ## Validation
 
 ```bash
@@ -123,6 +174,12 @@ kubectl apply -f infra/kubernetes/
 
 - Event-driven microservices with Kafka topics for shipment lifecycle events.
 - Low-latency operational read models backed by PostgreSQL.
-- AI-style copilot using deterministic logistics reasoning that can be swapped for an LLM adapter.
+- AI copilot integration for OpenAI or Claude, with safe natural-language-to-query planning and deterministic fallback.
 - Cloud-native packaging with Docker, Kubernetes readiness/liveness probes, and actuator metrics.
 - Monitoring stack with Prometheus scrape configuration and Grafana provisioning.
+
+## Resume Line
+
+Autonomous Supply Chain Intelligence Platform - Java, Spring Boot, Kafka, PostgreSQL, Docker, Kubernetes, React
+
+Built a production-style supply chain visibility platform using Spring Boot microservices, Kafka event streaming, PostgreSQL persistence, Kubernetes deployment manifests, and React dashboard to track shipments, detect delays, analyze bottlenecks, and support AI-powered logistics operations.
