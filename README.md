@@ -8,7 +8,7 @@ Production-style supply chain intelligence platform for real-time logistics visi
 
 | Dashboard | Kafka Stream |
 | --- | --- |
-| ![React operations dashboard](docs/screenshots/dashboard.svg) | ![Kafka shipment stream](docs/screenshots/kafka-stream.svg) |
+| ![React operations dashboard](docs/screenshots/dashboard.png) | ![Kafka shipment stream](docs/screenshots/kafka-stream.svg) |
 
 | Swagger / API | Grafana |
 | --- | --- |
@@ -20,6 +20,7 @@ Demo assets:
 - [Screenshot capture checklist](docs/demo/capture-checklist.md)
 - [API response samples](docs/evidence/api-response-samples.md)
 - [Kafka consumer sample](docs/evidence/kafka-consumer-sample.txt)
+- [Local validation notes](docs/evidence/local-validation.md)
 
 ## Tech Stack
 
@@ -28,7 +29,7 @@ Demo assets:
 - PostgreSQL persistence with Flyway migrations
 - React + TypeScript operations dashboard
 - Springdoc OpenAPI Swagger UI
-- OpenAI or Claude-backed logistics copilot with deterministic fallback
+- OpenAI or Claude-backed logistics copilot with offline fallback
 - Docker Compose for local development
 - Kubernetes manifests for cloud-native deployment on AKS, EKS, or any conformant cluster
 - Prometheus and Grafana observability
@@ -90,7 +91,7 @@ The copilot supports three modes:
 
 - `AI_PROVIDER=openai` - sends the safe query plan and result rows to the OpenAI Responses API.
 - `AI_PROVIDER=anthropic` - sends the same evidence packet to Claude Messages API.
-- `AI_PROVIDER=none` - uses deterministic logistics reasoning, useful for local demos without API keys.
+- `AI_PROVIDER=none` - uses the offline fallback path, useful for local demos without API keys.
 
 Natural-language questions are mapped to predefined SQL templates in the intelligence service. The LLM never receives permission to generate arbitrary SQL; it only summarizes rows returned by safe query plans such as delay risk, bottleneck, root-cause, and operations summary.
 
@@ -174,7 +175,7 @@ kubectl apply -f infra/kubernetes/
 
 - Event-driven microservices with Kafka topics for shipment lifecycle events.
 - Low-latency operational read models backed by PostgreSQL.
-- AI copilot integration for OpenAI or Claude, with safe natural-language-to-query planning and deterministic fallback.
+- AI copilot integration for OpenAI or Claude, with safe natural-language-to-query planning and offline fallback.
 - Cloud-native packaging with Docker, Kubernetes readiness/liveness probes, and actuator metrics.
 - Monitoring stack with Prometheus scrape configuration and Grafana provisioning.
 

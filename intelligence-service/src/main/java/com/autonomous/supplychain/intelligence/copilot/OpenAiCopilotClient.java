@@ -59,7 +59,7 @@ public class OpenAiCopilotClient implements AiCopilotClient {
             return extractText(response)
                     .map(text -> withProviderEvidence(text, fallback, queryPlan, "OpenAI " + properties.getOpenai().getModel()));
         } catch (RestClientException ex) {
-            log.warn("OpenAI copilot request failed; falling back to deterministic response", ex);
+            log.warn("OpenAI copilot request failed; using offline fallback response", ex);
             return Optional.empty();
         }
     }

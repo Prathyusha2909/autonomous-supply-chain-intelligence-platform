@@ -57,7 +57,7 @@ public class ClaudeCopilotClient implements AiCopilotClient {
             return extractText(response)
                     .map(text -> withProviderEvidence(text, fallback, queryPlan, "Claude " + properties.getAnthropic().getModel()));
         } catch (RestClientException ex) {
-            log.warn("Claude copilot request failed; falling back to deterministic response", ex);
+            log.warn("Claude copilot request failed; using offline fallback response", ex);
             return Optional.empty();
         }
     }

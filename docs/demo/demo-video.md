@@ -71,7 +71,7 @@ Show:
 
 - `query-plan` evidence
 - OpenAI or Claude provider evidence when `AI_PROVIDER` and API key are configured
-- fallback deterministic answer if no API key is configured
+- offline fallback answer if no API key is configured
 
 ## 2:25-2:50 Observability
 
