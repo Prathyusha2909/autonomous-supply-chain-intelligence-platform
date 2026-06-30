@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Autonomous Supply Chain Intelligence Platform architecture</title>
+  <desc id="desc">React frontend routes through Spring Cloud Gateway to shipment and intelligence services. Kafka streams shipment events into intelligence read models backed by PostgreSQL, with Prometheus and Grafana observability.</desc>
+  <rect width="1280" height="720" fill="#f4f7f6"/>
+  <text x="48" y="72" fill="#15222a" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Autonomous Supply Chain Intelligence Platform</text>
+  <text x="48" y="108" fill="#5b6d67" font-family="Segoe UI, Arial, sans-serif" font-size="16">Event-driven logistics visibility, delay risk analysis, and AI operations copilot</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#2a7468"/>
+    </marker>
+    <style>
+      .box { fill: #ffffff; stroke: #c9d8d4; stroke-width: 2; rx: 10; }
+      .title { fill: #16242b; font-family: Segoe UI, Arial, sans-serif; font-size: 20px; font-weight: 700; }
+      .body { fill: #5b6d67; font-family: Segoe UI, Arial, sans-serif; font-size: 14px; }
+      .chip { fill: #e8f2ef; stroke: #b7d3cc; stroke-width: 1; rx: 16; }
+      .chipText { fill: #1f5f56; font-family: Segoe UI, Arial, sans-serif; font-size: 13px; font-weight: 700; }
+      .line { stroke: #2a7468; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #bb6f34; stroke-width: 3; fill: none; stroke-dasharray: 8 8; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect class="box" x="54" y="180" width="230" height="130"/>
+  <text class="title" x="78" y="224">React Ops Console</text>
+  <text class="body" x="78" y="254">Shipment dashboard</text>
+  <text class="body" x="78" y="278">Risk hotspots</text>
+
+  <rect class="box" x="378" y="180" width="230" height="130"/>
+  <text class="title" x="402" y="224">Spring Gateway</text>
+  <text class="body" x="402" y="254">CORS, route aggregation</text>
+  <text class="body" x="402" y="278">/api/* entry point</text>
+
+  <rect class="box" x="702" y="118" width="240" height="132"/>
+  <text class="title" x="726" y="162">Shipment Service</text>
+  <text class="body" x="726" y="192">Create shipments</text>
+  <text class="body" x="726" y="216">Publish lifecycle events</text>
+
+  <rect class="box" x="702" y="302" width="240" height="150"/>
+  <text class="title" x="726" y="346">Intelligence Service</text>
+  <text class="body" x="726" y="376">Kafka consumer</text>
+  <text class="body" x="726" y="400">Delay risk scoring</text>
+  <text class="body" x="726" y="424">OpenAI/Claude copilot</text>
+
+  <rect class="box" x="1010" y="118" width="210" height="132"/>
+  <text class="title" x="1034" y="162">PostgreSQL</text>
+  <text class="body" x="1034" y="192">Shipment state</text>
+  <text class="body" x="1034" y="216">Event timeline</text>
+
+  <rect class="box" x="1010" y="302" width="210" height="150"/>
+  <text class="title" x="1034" y="346">Read Models</text>
+  <text class="body" x="1034" y="376">Risk profiles</text>
+  <text class="body" x="1034" y="400">Bottlenecks</text>
+  <text class="body" x="1034" y="424">Copilot evidence</text>
+
+  <rect class="box" x="378" y="488" width="230" height="112"/>
+  <text class="title" x="402" y="532">Event Simulator</text>
+  <text class="body" x="402" y="562">Synthetic global lanes</text>
+
+  <rect class="box" x="702" y="514" width="240" height="86"/>
+  <text class="title" x="726" y="558">Kafka</text>
+  <text class="body" x="726" y="584">shipment.events topic</text>
+
+  <rect class="box" x="1010" y="514" width="210" height="86"/>
+  <text class="title" x="1034" y="558">Prometheus + Grafana</text>
+  <text class="body" x="1034" y="584">Actuator metrics</text>
+
+  <path class="line" d="M284 245 H378"/>
+  <path class="line" d="M608 245 C650 245 650 184 702 184"/>
+  <path class="line" d="M608 245 C650 245 650 377 702 377"/>
+  <path class="line" d="M942 184 H1010"/>
+  <path class="line" d="M942 377 H1010"/>
+  <path class="line" d="M608 544 H702"/>
+  <path class="line" d="M822 514 V452"/>
+  <path class="line" d="M822 250 V302"/>
+  <path class="dash" d="M942 557 H1010"/>
+  <path class="dash" d="M942 220 C990 250 990 514 1010 550"/>
+
+  <rect class="chip" x="54" y="640" width="104" height="34"/>
+  <text class="chipText" x="77" y="662">Java 17</text>
+  <rect class="chip" x="170" y="640" width="124" height="34"/>
+  <text class="chipText" x="192" y="662">Spring Boot</text>
+  <rect class="chip" x="306" y="640" width="82" height="34"/>
+  <text class="chipText" x="328" y="662">Kafka</text>
+  <rect class="chip" x="400" y="640" width="128" height="34"/>
+  <text class="chipText" x="422" y="662">PostgreSQL</text>
+  <rect class="chip" x="540" y="640" width="86" height="34"/>
+  <text class="chipText" x="562" y="662">React</text>
+  <rect class="chip" x="638" y="640" width="114" height="34"/>
+  <text class="chipText" x="660" y="662">Kubernetes</text>
+  <rect class="chip" x="764" y="640" width="148" height="34"/>
+  <text class="chipText" x="786" y="662">OpenAI/Claude</text>
+</svg>

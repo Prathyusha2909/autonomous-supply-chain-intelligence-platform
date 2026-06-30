@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title">
+  <title id="title">Grafana observability dashboard preview</title>
+  <rect width="1280" height="720" fill="#111827"/>
+  <rect x="32" y="32" width="1216" height="656" rx="10" fill="#17212b" stroke="#2e3a46"/>
+  <text x="64" y="78" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="800" fill="#ffffff">Supply Chain Platform Overview</text>
+  <text x="64" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#aab6c0">Prometheus metrics from Spring Boot actuator endpoints</text>
+  <rect x="64" y="144" width="540" height="212" rx="8" fill="#0f1720" stroke="#33404d"/>
+  <text x="92" y="184" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="800" fill="#ffffff">HTTP Request Rate</text>
+  <polyline points="96,300 154,282 212,288 270,250 328,262 386,220 444,238 502,198 570,210" fill="none" stroke="#7fe7c4" stroke-width="4"/>
+  <polyline points="96,320 154,314 212,318 270,306 328,300 386,294 444,286 502,280 570,276" fill="none" stroke="#f3b34e" stroke-width="4"/>
+  <rect x="642" y="144" width="540" height="212" rx="8" fill="#0f1720" stroke="#33404d"/>
+  <text x="670" y="184" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="800" fill="#ffffff">95th Percentile Latency</text>
+  <polyline points="674,300 732,294 790,282 848,286 906,248 964,258 1022,230 1080,242 1148,218" fill="none" stroke="#82aaff" stroke-width="4"/>
+  <rect x="64" y="392" width="342" height="196" rx="8" fill="#0f1720" stroke="#33404d"/>
+  <text x="92" y="432" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="800" fill="#ffffff">Shipment Events</text>
+  <text x="92" y="506" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="800" fill="#7fe7c4">1.2k</text>
+  <text x="92" y="542" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#aab6c0">events processed / hour</text>
+  <rect x="470" y="392" width="342" height="196" rx="8" fill="#0f1720" stroke="#33404d"/>
+  <text x="498" y="432" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="800" fill="#ffffff">High-Risk Shipments</text>
+  <text x="498" y="506" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="800" fill="#f3b34e">7</text>
+  <text x="498" y="542" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#aab6c0">risk score >= 0.65</text>
+  <rect x="876" y="392" width="306" height="196" rx="8" fill="#0f1720" stroke="#33404d"/>
+  <text x="904" y="432" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="800" fill="#ffffff">Service Health</text>
+  <circle cx="934" cy="496" r="12" fill="#7fe7c4"/><text x="958" y="502" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#d9e2e8">gateway-service</text>
+  <circle cx="934" cy="534" r="12" fill="#7fe7c4"/><text x="958" y="540" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#d9e2e8">shipment-service</text>
+  <circle cx="934" cy="572" r="12" fill="#7fe7c4"/><text x="958" y="578" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#d9e2e8">intelligence-service</text>
+  <text x="64" y="642" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#aab6c0">Replace this preview with a live Grafana screenshot after running docker compose locally.</text>
+</svg>

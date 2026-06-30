@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title">
+  <title id="title">React operations dashboard screenshot preview</title>
+  <rect width="1280" height="720" fill="#f4f7f6"/>
+  <text x="40" y="56" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="800" fill="#16242b">Real-Time Logistics Control Tower</text>
+  <text x="40" y="86" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#236c60">Autonomous Supply Chain Intelligence</text>
+  <rect x="1110" y="34" width="126" height="36" rx="18" fill="#8b5e20"/>
+  <text x="1138" y="57" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="800" fill="#fff">Demo data</text>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect x="40" y="118" width="230" height="82" rx="8" fill="#fff" stroke="#d7e2de"/>
+    <text x="62" y="150" font-size="13" fill="#66756f">Tracked shipments</text>
+    <text x="62" y="182" font-size="30" font-weight="800" fill="#16242b">3</text>
+    <rect x="286" y="118" width="230" height="82" rx="8" fill="#fff" stroke="#d7e2de"/>
+    <text x="308" y="150" font-size="13" fill="#66756f">High risk</text>
+    <text x="308" y="182" font-size="30" font-weight="800" fill="#16242b">1</text>
+    <rect x="532" y="118" width="230" height="82" rx="8" fill="#fff" stroke="#d7e2de"/>
+    <text x="554" y="150" font-size="13" fill="#66756f">Bottlenecks</text>
+    <text x="554" y="182" font-size="30" font-weight="800" fill="#16242b">1</text>
+    <rect x="778" y="118" width="230" height="82" rx="8" fill="#fff" stroke="#d7e2de"/>
+    <text x="800" y="150" font-size="13" fill="#66756f">Average risk</text>
+    <text x="800" y="182" font-size="30" font-weight="800" fill="#16242b">46%</text>
+  </g>
+  <rect x="40" y="226" width="710" height="286" rx="8" fill="#fff" stroke="#d7e2de"/>
+  <text x="64" y="264" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="800" fill="#66756f">NETWORK</text>
+  <text x="64" y="292" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="800" fill="#16242b">Risk Hotspots</text>
+  <rect x="64" y="318" width="662" height="138" rx="8" fill="#eef4f1" stroke="#d7e2de"/>
+  <path d="M160 384 C250 330 430 350 608 384" fill="none" stroke="#2a7468" stroke-width="4"/>
+  <path d="M610 384 C650 390 678 420 698 440" fill="none" stroke="#bd6f2f" stroke-width="4"/>
+  <circle cx="618" cy="390" r="10" fill="#c74843" stroke="#fff" stroke-width="4"/>
+  <circle cx="164" cy="384" r="8" fill="#2a7468" stroke="#fff" stroke-width="4"/>
+  <circle cx="430" cy="356" r="8" fill="#2a7468" stroke="#fff" stroke-width="4"/>
+  <text x="64" y="486" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="800" fill="#16242b">Port of Singapore</text>
+  <text x="208" y="486" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#66756f">Port congestion is increasing dwell time and berth uncertainty.</text>
+  <rect x="778" y="226" width="462" height="286" rx="8" fill="#fff" stroke="#d7e2de"/>
+  <text x="802" y="264" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="800" fill="#66756f">AI OPERATIONS</text>
+  <text x="802" y="292" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="800" fill="#16242b">Copilot</text>
+  <text x="802" y="326" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#46534f">The highest-risk shipment is SHP-SIM-001.</text>
+  <text x="802" y="352" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#46534f">Escalate carrier recovery and update the customer ETA.</text>
+  <rect x="802" y="382" width="392" height="42" rx="6" fill="#f4f7f6"/>
+  <text x="820" y="408" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#16242b">SHP-SIM-001 risk 82%</text>
+  <rect x="802" y="442" width="360" height="40" rx="8" fill="#fff" stroke="#cbd8d4"/>
+  <text x="820" y="467" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#66756f">Which shipments are likely delayed?</text>
+  <rect x="40" y="538" width="836" height="138" rx="8" fill="#fff" stroke="#d7e2de"/>
+  <text x="64" y="576" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="800" fill="#16242b">Active Shipments</text>
+  <line x1="64" y1="596" x2="850" y2="596" stroke="#e3e9e7"/>
+  <text x="64" y="626" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="800" fill="#16242b">SHP-SIM-001</text>
+  <text x="210" y="626" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#66756f">Shanghai, CN to Los Angeles, US</text>
+  <text x="532" y="626" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#66756f">Port of Singapore</text>
+  <rect x="688" y="606" width="104" height="28" rx="6" fill="#fbe7e3"/>
+  <text x="710" y="625" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="800" fill="#8b2f2d">EXCEPTION</text>
+  <rect x="904" y="538" width="336" height="138" rx="8" fill="#fff" stroke="#d7e2de"/>
+  <text x="928" y="576" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="800" fill="#16242b">Bottlenecks</text>
+  <text x="928" y="620" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="800" fill="#16242b">Port of Singapore</text>
+  <text x="928" y="646" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#66756f">6 impacted shipments, 430 min dwell</text>
+</svg>

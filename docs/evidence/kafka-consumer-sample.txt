@@ -1,0 +1,6 @@
+Command:
+kafka-console-consumer --bootstrap-server localhost:9092 --topic shipment.events --from-beginning
+
+Sample output:
+{"eventId":"d7f2a8ea-8b33-42cf-bd90-ef21b5e18f68","shipmentId":"SHP-8F2A91CD","eventType":"SHIPMENT_CREATED","orderNumber":"PO-44519","carrier":"Maersk","origin":"Shanghai, CN","destination":"Los Angeles, US","status":"CREATED","plannedEta":"2026-07-05T16:00:00Z","predictedEta":"2026-07-05T16:00:00Z","severity":"LOW","notes":"Shipment created and awaiting carrier pickup."}
+{"eventId":"e63590c4-b1ac-4a95-a715-3983f30a4081","shipmentId":"SHP-8F2A91CD","eventType":"EXCEPTION_RAISED","orderNumber":"PO-44519","carrier":"Maersk","origin":"Shanghai, CN","destination":"Los Angeles, US","currentLocation":{"name":"Port of Singapore","latitude":1.2644,"longitude":103.82},"status":"EXCEPTION","plannedEta":"2026-07-05T16:00:00Z","predictedEta":"2026-07-06T03:30:00Z","dwellMinutes":420,"severity":"HIGH","exceptionCode":"PORT_CONGESTION","notes":"Vessel waiting for berth assignment."}
