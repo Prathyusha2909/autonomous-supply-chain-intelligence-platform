@@ -16,7 +16,7 @@ Production-style supply chain intelligence platform for real-time logistics visi
 
 Demo assets:
 
-- [2-minute demo walkthrough video](docs/demo/supply-chain-demo-walkthrough.mp4)
+- [2-minute demo walkthrough video](https://github.com/Prathyusha2909/autonomous-supply-chain-intelligence-platform/blob/main/docs/demo/supply-chain-demo-walkthrough.mp4)
 - [Demo video script](docs/demo/demo-video.md)
 - [Screenshot capture checklist](docs/demo/capture-checklist.md)
 - [API response samples](docs/evidence/api-response-samples.md)
