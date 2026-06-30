@@ -49,7 +49,7 @@ public class CopilotProperties {
     public static class OpenAi {
         private String apiKey;
         private String endpoint = "https://api.openai.com/v1/responses";
-        private String model = "gpt-5.5";
+        private String model = "gpt-4.1-mini";
         private int maxOutputTokens = 700;
 
         public String getApiKey() {
@@ -88,7 +88,7 @@ public class CopilotProperties {
     public static class Anthropic {
         private String apiKey;
         private String endpoint = "https://api.anthropic.com/v1/messages";
-        private String model = "claude-sonnet-4-5";
+        private String model = "claude-3-5-sonnet-latest";
         private String version = "2023-06-01";
         private int maxTokens = 700;
 

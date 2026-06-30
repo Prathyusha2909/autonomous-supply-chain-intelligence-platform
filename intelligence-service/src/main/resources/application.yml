@@ -37,12 +37,12 @@ app:
     openai:
       api-key: ${OPENAI_API_KEY:}
       endpoint: ${OPENAI_API_ENDPOINT:https://api.openai.com/v1/responses}
-      model: ${OPENAI_MODEL:gpt-5.5}
+      model: ${OPENAI_MODEL:gpt-4.1-mini}
       max-output-tokens: ${OPENAI_MAX_OUTPUT_TOKENS:700}
     anthropic:
       api-key: ${ANTHROPIC_API_KEY:}
       endpoint: ${ANTHROPIC_API_ENDPOINT:https://api.anthropic.com/v1/messages}
-      model: ${ANTHROPIC_MODEL:claude-sonnet-4-5}
+      model: ${ANTHROPIC_MODEL:claude-3-5-sonnet-latest}
       version: ${ANTHROPIC_VERSION:2023-06-01}
       max-tokens: ${ANTHROPIC_MAX_TOKENS:700}
 
